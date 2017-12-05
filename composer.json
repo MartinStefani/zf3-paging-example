@@ -25,7 +25,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Application\\": "module/Application/src/"
+            "Application\\": "module/Application/src/",
+            "Paging\\": "module/Paging/src/"
         }
     },
     "autoload-dev": {
@@ -43,7 +44,7 @@
         "post-create-project-cmd": [
             "@development-enable"
         ],
-        "serve": "php -S 0.0.0.0:8080 -t public public/index.php",
+        "serve": "php -S 0.0.0.0:8080 -t public index.php",
         "test": "phpunit"
     },
     "require-dev": {
