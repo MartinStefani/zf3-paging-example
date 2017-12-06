@@ -1,0 +1,23 @@
+DROP SCHEMA IF EXISTS practice;
+CREATE SCHEMA practice CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
+USE practice;
+
+CREATE TABLE Buyer (
+  BuyerID INT(11) NOT NULL PRIMARY KEY,
+  FirstName VARCHAR(50),
+  LastName VARCHAR(50)
+) ENGINE = InnoDB;
+
+CREATE TABLE Vehicle (
+  VehicleID INT(11) NOT NULL PRIMARY KEY,
+  InhouseSellerID INT(11) NOT NULL,
+  BuyerID INT(11) NOT NULL,
+  ModelID INT(11) NOT NULL,
+  SaleDate DATE NOT NULL,
+  BuyDate DATE NOT NULL
+) ENGINE = InnoDB;
+
+ALTER TABLE Vehicle
+ADD CONSTRAINT fk_Vehicle_BuyerID
+FOREIGN KEY (BuyerID) REFERENCES Buyer (BuyerID);
+

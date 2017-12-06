@@ -26,7 +26,7 @@
     "autoload": {
         "psr-4": {
             "Application\\": "module/Application/src/",
-            "Paging\\": "module/Paging/src/"
+            "Practice\\": "module/Practice/src/"
         }
     },
     "autoload-dev": {
