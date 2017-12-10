@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Practice;
 
+use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
@@ -15,7 +16,7 @@ return [
     'router' => [
         'routes' => [
             'practice' => [
-                'type'    => 'Literal',
+                'type'    => Segment::class,
                 'options' => [
                     // Change this to something specific to your module
                     'route'    => '/practice[/:action]',
@@ -33,8 +34,23 @@ return [
         ],
     ],
     'view_manager' => [
+        'display_not_found_reason' => true,
+        'display_exceptions'       => true,
+        'doctype'                  => 'HTML5',
+        'not_found_template'       => 'error/404',
+        'exception_template'       => 'error/index',
+        'template_map' => [
+            'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
+            'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
+            'error/404'               => __DIR__ . '/../view/error/404.phtml',
+            'error/index'             => __DIR__ . '/../view/error/index.phtml',
+        ],
         'template_path_stack' => [
-            'Practice' => __DIR__ . '/../view',
+            __DIR__ . '/../view',
+//            'Practice' => __DIR__ . '/../view',
+        ],
+        'strategies' => [
+            'ViewJsonStrategy',
         ],
     ],
 ];

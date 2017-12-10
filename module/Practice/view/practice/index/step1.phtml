@@ -1,0 +1,34 @@
+<?php
+declare(strict_types=1);
+
+// Step 1: Parse some CSV
+?>
+<input type="hidden" id="moduleName" value="practice"/>
+<input type="hidden" id="pageName" value="parse"/>
+
+<div>
+    <form action="parse" method="post">
+        <div class="form-group">
+            <label for="inputUrl">CSV URL</label>
+            <input type="text" class="form-control" id="inputUrl" placeholder="CSV URL"
+                   value="https://admin.b2b-carmarket.com//test/project">
+        </div>
+        <button type="button" class="btn btn-primary">Parse</button>
+    </form>
+</div>
+<div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Ena</th>
+            <th>Dve</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>eins</td>
+            <td>zwei</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

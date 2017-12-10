@@ -1,21 +1,37 @@
 <?php
 declare(strict_types=1);
 
-/**
- * @link      http://github.com/zendframework/ZendSkeletonModule for the canonical source repository
- * @copyright Copyright (c) 2005-2016 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
-
 namespace Practice\Controller;
 
+use Practice\Service\CsvParseService;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\JsonModel;
 
 class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        echo 'jupi!';
-        return [];
     }
+
+    public function step1Action()
+    {
+    }
+
+    public function parseAction()
+    {
+        $data = $this->params()->fromPost();
+
+        if (!empty($data)) {
+            if (array_key_exists('csvUrl', $data)) {
+                $csvUrl = $data['csvUrl'];
+                $csvParseService = new CsvParseService();
+
+                $returnData = $csvParseService->parseCsvFromUrlToArray($csvUrl);
+            }
+        }
+
+        return new JsonModel($returnData);
+    }
+
+
 }
