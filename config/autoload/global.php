@@ -1,18 +1,25 @@
 <?php
-/**
- * Global Configuration Override
- *
- * You can use this file for overriding configuration values from modules, etc.
- * You would place values in here that are agnostic to the environment and not
- * sensitive to security.
- *
- * @NOTE: In practice, this file will typically be INCLUDED in your source
- * control, so do not include passwords or other sensitive information in this
- * file.
- */
+declare(strict_types=1);
+
+use Doctrine\DBAL\Driver\PDOMySql\Driver as PDOMySqlDriver;
+use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 
 return [
-//    'db' => [
-//        'driver' => 'mysql',
-//    ],
+    'doctrine' => [
+        'connection' => [
+            // Configuration for service `doctrine.connection.orm_default` service
+            'orm_default' => [
+                'driverClass' => PDOMySqlDriver::class,
+                // connection parameters, see
+                // http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html
+                'params' => [
+                    'host' => 'localhost',
+                    'port' => '3306',
+                    'user' => 'root',
+                    'password' => 'root',
+                    'dbname' => 'practice',
+                ],
+            ],
+        ],
+    ],
 ];

@@ -18,6 +18,8 @@ return [
     'Zend\Cache',
     'Zend\Router',
     'Zend\Validator',
+    'DoctrineModule',
+    'DoctrineORMModule',
     'Practice',
     'Application',
 ];

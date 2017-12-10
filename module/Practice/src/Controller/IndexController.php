@@ -11,6 +11,7 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
+        ini_set('display_errors', '1');
     }
 
     public function step1Action()
