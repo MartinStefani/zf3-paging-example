@@ -25,7 +25,6 @@ class IndexController extends AbstractActionController
             if (array_key_exists('csvUrl', $data)) {
                 $csvUrl = $data['csvUrl'];
                 $csvParseService = new CsvParseService();
-
                 $returnData = $csvParseService->parseCsvFromUrlToArray($csvUrl);
             }
         }

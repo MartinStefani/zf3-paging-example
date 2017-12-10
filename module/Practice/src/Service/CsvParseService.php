@@ -10,6 +10,7 @@ class CsvParseService
         // todo: input data validation
 
         $header = [];
+        $dataRows = [];
         $niceArray = [];
 
         ini_set('auto_detect_line_endings', '1');
@@ -23,12 +24,17 @@ class CsvParseService
                     continue;
                 } else {
                     foreach ($row as $key => $value) {
-                        $niceArray[$rowNumber][$header[$key]] = str_replace('<br>', '', $value);
+                        $dataRows[$rowNumber][$header[$key]] = str_replace('<br>', '', $value);
                     }
                     ++$rowNumber;
                 }
             }
             fclose($handle);
+
+            $niceArray = [
+              'HeadRows' => $header,
+              'DataRows' => $dataRows,
+            ];
         }
 
         return $niceArray;

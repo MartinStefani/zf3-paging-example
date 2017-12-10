@@ -9,16 +9,54 @@ $(function () {
             'csvUrl': csvUrl
         };
 
-        console.log('show loader');
+        showLoader();
+        var parsedDataContainer = $('#parsedDataTable');
+        parsedDataContainer.hide();
+
         $.post(href, formData)
             .done(function (data) {
-                console.log('done');
-                console.log(data);
+                dataToTable(data);
             }).fail(function (data) {
-                console.log('fajl miserably');
-            }).always(function () {
-                console.log('hide loader');
-            });
-    });
+            console.log('fajl miserably');
+        }).always(function () {
+            hideLoader();
+        });
 
+        function showLoader() {
+            $('#loader').show();
+        }
+
+        function hideLoader() {
+            $('#loader').hide();
+        }
+
+        function dataToTable(data) {
+            var parsedDataContainer = $('#parsedDataTable');
+            parsedDataContainer.hide();
+
+            var table = parsedDataContainer.find('table');
+            var thead = table.find('thead');
+            var tbody = table.find('tbody');
+
+            // Table Head
+            thead.empty();
+            $.each(data.HeadRows, function (i, colTitle) {
+                var th = $('<th>').text(colTitle);
+                thead.append(th);
+            });
+
+            // Table Data
+            tbody.empty();
+            $.each(data.DataRows, function (i, rowData) {
+                var tr = $('<tr>');
+                $.each(rowData, function (i, rowCell) {
+                    var td = $('<td>').text(rowCell);
+                    tr.append(td);
+                });
+                tbody.append(tr);
+            });
+
+            parsedDataContainer.show();
+        }
+    });
 });
