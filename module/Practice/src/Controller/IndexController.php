@@ -64,4 +64,11 @@ class IndexController extends AbstractActionController
 
         return new JsonModel(['Status' => 'Success']);
     }
+
+    public function fakeBuyerNamesAction()
+    {
+        $csvParseService = new CsvParseService($this->entityManager);
+        $csvParseService->fakeBuyerNames();
+        return new JsonModel(['Status' => 'Success']);
+    }
 }

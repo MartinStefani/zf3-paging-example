@@ -1,5 +1,21 @@
 $(function () {
-    $('form button.importAction').on('click', function() {
+    $('form button.fakeBuyerNamesAction').on('click', function () {
+        var href = $(this).data('action');
+
+        showLoader();
+        $.get(href)
+            .done(function(data) {
+                console.log('done');
+            })
+            .fail(function(data) {
+                console.log('fail');
+            })
+            .always(function() {
+                hideLoader();
+            });
+    });
+
+    $('form button.importAction').on('click', function () {
         var href = $(this).data('action');
         var csvUrl = $('#inputUrl').val();
 
@@ -34,7 +50,7 @@ $(function () {
         }).always(function () {
             hideLoader();
         });
-   }
+    }
 
     function showLoader() {
         $('#loader').show();

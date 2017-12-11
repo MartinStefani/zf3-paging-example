@@ -23,4 +23,14 @@ class BuyerRepository extends EntityRepository
 
         return $queryBuilder->getQuery()->getResult();
     }
+
+    public function getAll(): array
+    {
+        $entityManager = $this->getEntityManager();
+        $queryBuilder = $entityManager->createQueryBuilder();
+        $queryBuilder->select('b')
+            ->from(Buyer::class, 'b');
+
+        return $queryBuilder->getQuery()->getResult();
+    }
 }

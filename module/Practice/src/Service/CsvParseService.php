@@ -5,6 +5,7 @@ namespace Practice\Service;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\OptimisticLockException;
+use Faker\Factory;
 use Practice\Entity\Buyer;
 use Practice\Entity\Vehicle;
 
@@ -107,6 +108,28 @@ class CsvParseService
 
             $this->entityManager->persist($b);
             $this->entityManager->flush();
+        }
+    }
+
+    public function fakeBuyerNames()
+    {
+        /** @var \Practice\Repository\BuyerRepository $buyerRepository */
+        $buyerRepository = $this->entityManager->getRepository(Buyer::class);
+        $buyers= $buyerRepository->getAll();
+
+        $faker = Factory::create();
+
+        foreach ($buyers as $buyer) {
+            /** @var \Practice\Entity\Buyer $buyer */
+            $buyer->setFirstName($faker->firstName);
+            $buyer->setLastName($faker->lastName);
+
+            $this->entityManager->persist($buyer);
+        }
+
+        try {
+            $this->entityManager->flush();
+        } catch (OptimisticLockException $e) {
         }
     }
 }
