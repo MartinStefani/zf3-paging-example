@@ -7,7 +7,7 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="\Practice\Repository\VehicleRepository")
  * @ORM\Table(name="Vehicle")
  */
 class Vehicle

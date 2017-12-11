@@ -4,7 +4,7 @@ declare(strict_types=1);
 // Step 1: Parse some CSV
 ?>
 <input type="hidden" id="moduleName" value="practice"/>
-<input type="hidden" id="pageName" value="parse"/>
+<input type="hidden" id="pageName" value="step1"/>
 
 <div>
     <form action="parse" method="post">
@@ -16,6 +16,7 @@ declare(strict_types=1);
         <button type="button" class="btn btn-primary parseAction">Parse</button>
         <button type="button" class="btn importAction" data-action="import-db">Import to DB</button>
         <button type="button" class="btn fakeBuyerNamesAction" data-action="fakeBuyerNames">Fake Buyer</button>
+        <button type="button" class="btn step2Action" data-action="step2">Paginated table</button>
     </form>
 </div>
 <div>

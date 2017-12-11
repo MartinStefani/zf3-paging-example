@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0f6d8cb2c7f74d1cf7f925c7c57415b0",
-    "content-hash": "2543441d7a31db731bfb128d9bdf5c76",
+    "hash": "1075f623523edbdd8508e8bcc6e68559",
+    "content-hash": "4b0dd1260b650dbb8df351fb6d889796",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -1153,6 +1153,46 @@
                 "shim"
             ],
             "time": "2017-10-11 12:05:26"
+        },
+        {
+            "name": "vaibhavpandeyvpz/doctrine-datatables",
+            "version": "1.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vaibhavpandeyvpz/doctrine-datatables.git",
+                "reference": "e3955d339af8845a8bf083e989b92af3a17d008f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vaibhavpandeyvpz/doctrine-datatables/zipball/e3955d339af8845a8bf083e989b92af3a17d008f",
+                "reference": "e3955d339af8845a8bf083e989b92af3a17d008f",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/dbal": "~2.5",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "doctrine/orm": "~2.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\DataTables\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Helper library to implement doctrine powered server-side processing for jquery-datatables with joins, search, filtering and ordering.",
+            "homepage": "http://vaibhavpandeyvpz.github.io/doctrine-datatables",
+            "keywords": [
+                "datatables",
+                "doctrine",
+                "jquery"
+            ],
+            "time": "2017-05-29 02:19:03"
         },
         {
             "name": "zendframework/zend-authentication",

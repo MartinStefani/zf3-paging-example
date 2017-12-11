@@ -115,7 +115,7 @@ class CsvParseService
     {
         /** @var \Practice\Repository\BuyerRepository $buyerRepository */
         $buyerRepository = $this->entityManager->getRepository(Buyer::class);
-        $buyers= $buyerRepository->getAll();
+        $buyers = $buyerRepository->getAll();
 
         $faker = Factory::create();
 
@@ -131,5 +131,14 @@ class CsvParseService
             $this->entityManager->flush();
         } catch (OptimisticLockException $e) {
         }
+    }
+
+    public function getPage(int $pageSize, int $pageNumber)
+    {
+        //todo: validate the input
+
+        /** @var \Practice\Repository\VehicleRepository $vehicleRepository */
+        $vehicleRepository = $this->entityManager->getRepository(Vehicle::class);
+        return $vehicleRepository->getPage($pageSize, $pageNumber);
     }
 }

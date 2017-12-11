@@ -71,4 +71,34 @@ class IndexController extends AbstractActionController
         $csvParseService->fakeBuyerNames();
         return new JsonModel(['Status' => 'Success']);
     }
+
+    public function step2Action()
+    {
+        $pageNumber = 1;
+        $pageSize = 10;
+
+        $data = $this->params()->fromPost();
+
+        if (!$data) {
+            if (array_key_exists('pageNumber', $data)) {
+                $pageNumber = (int)$data['pageNumber'];
+            }
+
+            if (array_key_exists('pageSize', $data)) {
+                $pageSize = (int)$data['pageSize'];
+            }
+        }
+
+        $csvParseService = new CsvParseService($this->entityManager);
+        $page = $csvParseService->getPage($pageSize, $pageNumber);
+
+        $stuff = [];
+        foreach ($page as $item) {
+            /** @var \ */
+            //$stuff[]=$item->
+            //todo: tukaj sem ostal
+        }
+
+        return new JsonModel(['Page' => $page]);
+    }
 }
