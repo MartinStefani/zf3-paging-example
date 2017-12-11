@@ -11,7 +11,13 @@ use Zend\ServiceManager\Factory\InvokableFactory;
 return [
     'controllers' => [
         'factories' => [
-            Controller\IndexController::class => InvokableFactory::class,
+//            Controller\IndexController::class => InvokableFactory::class,
+            Controller\IndexController::class => Controller\Factory\IndexControllerFactory::class,
+        ],
+    ],
+    'service_manager' => [
+        'factories' => [
+            Service\CsvParseService::class => Service\Factory\CsvParseServiceFactory::class,
         ],
     ],
     'router' => [

@@ -1,0 +1,5 @@
+DELETE FROM Vehicle;
+DELETE FROM Buyer;
+
+SELECT * FROM Vehicle;
+SELECT * FROM Buyer;

@@ -3,12 +3,24 @@ declare(strict_types=1);
 
 namespace Practice\Controller;
 
+use Doctrine\ORM\EntityManager;
 use Practice\Service\CsvParseService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 
 class IndexController extends AbstractActionController
 {
+    /**
+     * Entity manager.
+     * @var EntityManager
+     */
+    private $entityManager;
+
+    public function __construct(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     public function indexAction()
     {
         ini_set('display_errors', '1');
@@ -20,12 +32,13 @@ class IndexController extends AbstractActionController
 
     public function parseAction()
     {
+        $returnData = [];
         $data = $this->params()->fromPost();
 
         if (!empty($data)) {
             if (array_key_exists('csvUrl', $data)) {
                 $csvUrl = $data['csvUrl'];
-                $csvParseService = new CsvParseService();
+                $csvParseService = new CsvParseService($this->entityManager);
                 $returnData = $csvParseService->parseCsvFromUrlToArray($csvUrl);
             }
         }
@@ -33,5 +46,22 @@ class IndexController extends AbstractActionController
         return new JsonModel($returnData);
     }
 
+    /**
+     * @return JsonModel
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function importDbAction()
+    {
+        $data = $this->params()->fromPost();
 
+        if (!empty($data)) {
+            if (array_key_exists('csvUrl', $data)) {
+                $csvUrl = $data['csvUrl'];
+                $csvParseService = new CsvParseService($this->entityManager);
+                $csvParseService->importCsvFromUrlToDb($csvUrl);
+            }
+        }
+
+        return new JsonModel(['Status' => 'Success']);
+    }
 }

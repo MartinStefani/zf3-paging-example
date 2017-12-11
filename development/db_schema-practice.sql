@@ -17,7 +17,8 @@ CREATE TABLE Vehicle (
   BuyDate DATE NOT NULL
 ) ENGINE = InnoDB;
 
+/*
 ALTER TABLE Vehicle
 ADD CONSTRAINT fk_Vehicle_BuyerID
 FOREIGN KEY (BuyerID) REFERENCES Buyer (BuyerID);
-
+*/

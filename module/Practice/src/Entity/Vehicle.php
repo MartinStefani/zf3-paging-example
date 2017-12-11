@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Practice\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -43,30 +44,30 @@ class Vehicle
     protected $BuyDate;
 
     //region Relations
-    /**
-     * @ORM\ManyToOne(targetEntity="\Practice\Entity\Buyer", inversedBy="B")
-     * @ORM\JoinColumn(name="id", referencedColumnName="BuyerID")
-     */
-    protected $buyer;
-
-    /**
-     * Returns associated Buyer
-     * @return Buyer
-     */
-    public function getBuyer(): Buyer
-    {
-        return $this->buyer;
-    }
-
-    /**
-     * Sets associated Buyer
-     * @param \Practice\Entity\Buyer $buyer
-     */
-    public function setBuyer(Buyer $buyer)
-    {
-        $this->buyer = $buyer;
-        $buyer->addVehicle($this);
-    }
+//    /**
+//     * @ORM\ManyToOne(targetEntity="\Practice\Entity\Buyer", inversedBy="B")
+//     * @ORM\JoinColumn(name="BuyerID", referencedColumnName="BuyerID")
+//     */
+//    protected $buyer;
+//
+//    /**
+//     * Returns associated Buyer
+//     * @return Buyer
+//     */
+//    public function getBuyer(): Buyer
+//    {
+//        return $this->buyer;
+//    }
+//
+//    /**
+//     * Sets associated Buyer
+//     * @param \Practice\Entity\Buyer $buyer
+//     */
+//    public function setBuyer(Buyer $buyer)
+//    {
+//        $this->buyer = $buyer;
+//        $buyer->addVehicle($this);
+//    }
     //endregion Relations
 
     //region Setters and Getters
@@ -92,12 +93,14 @@ class Vehicle
 
     public function setSaleDate(string $saleDate)
     {
-        $this->SaleDate = $saleDate;
+        $date = DateTime::createFromFormat('Y-m-d', $saleDate);
+        $this->SaleDate = $date;
     }
 
     public function setBuyDate(string $buyDate)
     {
-        $this->BuyDate = $buyDate;
+        $date = DateTime::createFromFormat('Y-m-d', $buyDate);
+        $this->BuyDate = $date;
     }
     //endregion
 

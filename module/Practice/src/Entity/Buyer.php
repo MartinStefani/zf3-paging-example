@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="\Practice\Repository\BuyerRepository")
  * @ORM\Table(name="Buyer")
  */
 class Buyer
@@ -47,9 +47,15 @@ class Buyer
 
     //endregion Relations
 
+    //region Setters and Getters
     public function setBuyerID(int $buyerId)
     {
         $this->BuyerID = $buyerId;
+    }
+
+    public function getBuyerID(): int
+    {
+        return $this->BuyerID;
     }
 
     public function setFirstName(string $firstName)
@@ -57,10 +63,22 @@ class Buyer
         $this->FirstName = $firstName;
     }
 
+    public function getFirstName(): string
+    {
+        return $this->FirstName;
+    }
+
     public function setLastName(string $lastName)
     {
         $this->LastName = $lastName;
     }
+
+    public function getLastName(): string
+    {
+        return $this->LastName;
+    }
+
+    //endregion
 
     public function __construct()
     {
