@@ -133,12 +133,12 @@ class CsvParseService
         }
     }
 
-    public function getPage(int $pageSize, int $pageNumber)
+    public function getPage(int $pageSize, int $startRecordNumber)
     {
         //todo: validate the input
 
         /** @var \Practice\Repository\VehicleRepository $vehicleRepository */
         $vehicleRepository = $this->entityManager->getRepository(Vehicle::class);
-        return $vehicleRepository->getPage($pageSize, $pageNumber);
+        return $vehicleRepository->getPage($pageSize, $startRecordNumber);
     }
 }

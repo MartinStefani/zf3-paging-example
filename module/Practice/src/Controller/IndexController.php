@@ -100,23 +100,24 @@ class IndexController extends AbstractActionController
 
     public function step2pageAction()
     {
-        $pageNumber = 1;
+        $startRecordNumber = 1;
         $pageSize = 10;
 
-        $data = $this->params()->fromPost();
+        //$data = $this->params()->fromPost();
+        $data = $this->params()->fromQuery();
 
         if (!$data) {
-            if (array_key_exists('pageNumber', $data)) {
-                $pageNumber = (int)$data['pageNumber'];
+            if (array_key_exists('start', $data)) {
+                $startRecordNumber = (int)$data['start'];
             }
 
-            if (array_key_exists('pageSize', $data)) {
-                $pageSize = (int)$data['pageSize'];
+            if (array_key_exists('length', $data)) {
+                $pageSize = (int)$data['length'];
             }
         }
 
         $csvParseService = new CsvParseService($this->entityManager);
-        $pageRows = $csvParseService->getPage($pageSize, $pageNumber);
+        $pageRows = $csvParseService->getPage($pageSize, $startRecordNumber);
 
         $simpleRows = [];
         foreach ($pageRows as $row) {

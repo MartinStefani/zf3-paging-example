@@ -9,16 +9,15 @@ use Practice\Entity\Vehicle;
 
 class VehicleRepository extends EntityRepository
 {
-    public function getPage(int $pageSize = 10, int $pageNumber = 1): array
+    public function getPage(int $pageSize = 10, int $startRecordNumber = 0): array
     {
-        $from = ($pageNumber - 1) * $pageSize;
 
         $entityManager = $this->getEntityManager();
         $queryBuilder = $entityManager->createQueryBuilder();
         $queryBuilder->select('v')
             ->from(Vehicle::class, 'v')
             ->orderBy('v.VehicleID', 'ASC')
-            ->setFirstResult($from)
+            ->setFirstResult($startRecordNumber)
             ->setMaxResults($pageSize);
 
         return $queryBuilder->getQuery()->getResult();
