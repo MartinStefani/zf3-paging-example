@@ -76,9 +76,19 @@ class Vehicle
         $this->VehicleID = $vehicleID;
     }
 
+    public function getVehicleID(): int
+    {
+        return $this->VehicleID;
+    }
+
     public function setInhouseSellerID(int $inhouseSellerID)
     {
         $this->InhouseSellerID = $inhouseSellerID;
+    }
+
+    public function getInhouseSellerID(): int
+    {
+        return $this->InhouseSellerID;
     }
 
     public function setBuyerID(int $buyerID)
@@ -86,9 +96,19 @@ class Vehicle
         $this->BuyerID = $buyerID;
     }
 
+    public function getBuyerID(): int
+    {
+        return $this->BuyerID;
+    }
+
     public function setModelID(int $modelID)
     {
         $this->ModelID = $modelID;
+    }
+
+    public function getModelID(): int
+    {
+        return $this->ModelID;
     }
 
     public function setSaleDate(string $saleDate)
@@ -97,10 +117,21 @@ class Vehicle
         $this->SaleDate = $date;
     }
 
+    public function getSaleDate(): DateTime
+    {
+        return $this->SaleDate;
+    }
+
     public function setBuyDate(string $buyDate)
     {
         $date = DateTime::createFromFormat('Y-m-d', $buyDate);
         $this->BuyDate = $date;
+    }
+
+    public function getBuyDate(): DateTime
+    {
+        return $this->BuyDate;
+
     }
     //endregion
 

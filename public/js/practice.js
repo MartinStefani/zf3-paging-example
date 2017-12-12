@@ -97,8 +97,18 @@ $(function () {
         }
 
         if ($('#pageName').val() === 'step2') {
-            $(function() {
-                $('#tableVehicles').DataTable();
+            $('#tableVehicles').DataTable({
+                "ajax": "/practice/step2page",
+                "deferRender": true,
+                "serverSide": true,
+                "columns": [
+                    {"data": "VehicleID"},
+                    {"data": "InhouseSellerID"},
+                    {"data": "BuyerID"},
+                    {"data": "ModelID"},
+                    {"data": "SaleDate"},
+                    {"data": "BuyDate"}
+                ]
             });
         }
     }

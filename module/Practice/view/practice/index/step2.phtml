@@ -1,3 +1,30 @@
 <input type="hidden" id="moduleName" value="practice"/>
 <input type="hidden" id="pageName" value="step2"/>
 
+<table id="tableVehicles" class="display dataTable" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th>VehicleID</th>
+        <th>InhouseSellerID</th>
+        <th>BuyerID</th>
+        <th>ModelID</th>
+        <th>SaleDate</th>
+        <th>BuyDate</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php
+    foreach ($this->pageRows as $row) {
+        /** @var \Practice\Entity\Vehicle $row */
+        echo '<tr>',
+        '<td>', $row->getVehicleID(), '</td>',
+        '<td>', $row->getInhouseSellerID(), '</td>',
+        '<td>', $row->getBuyerID(), '</td>',
+        '<td>', $row->getModelID(), '</td>',
+        '<td>', $row->getSaleDate()->format('Y-m-d'), '</td>',
+        '<td>', $row->getBuyDate()->format('Y-m-d'), '</td>',
+        '</tr>', "\n";
+    }
+    ?>
+    </tbody>
+</table>

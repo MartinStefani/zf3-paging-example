@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManager;
 use Practice\Service\CsvParseService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
+use Zend\View\Model\ViewModel;
 
 class IndexController extends AbstractActionController
 {
@@ -90,15 +91,48 @@ class IndexController extends AbstractActionController
         }
 
         $csvParseService = new CsvParseService($this->entityManager);
-        $page = $csvParseService->getPage($pageSize, $pageNumber);
+        $pageRows = $csvParseService->getPage($pageSize, $pageNumber);
 
-        $stuff = [];
-        foreach ($page as $item) {
-            /** @var \ */
-            //$stuff[]=$item->
-            //todo: tukaj sem ostal
+        return new ViewModel([
+            'pageRows' => $pageRows,
+        ]);
+    }
+
+    public function step2pageAction()
+    {
+        $pageNumber = 1;
+        $pageSize = 10;
+
+        $data = $this->params()->fromPost();
+
+        if (!$data) {
+            if (array_key_exists('pageNumber', $data)) {
+                $pageNumber = (int)$data['pageNumber'];
+            }
+
+            if (array_key_exists('pageSize', $data)) {
+                $pageSize = (int)$data['pageSize'];
+            }
         }
 
-        return new JsonModel(['Page' => $page]);
+        $csvParseService = new CsvParseService($this->entityManager);
+        $pageRows = $csvParseService->getPage($pageSize, $pageNumber);
+
+        $simpleRows = [];
+        foreach ($pageRows as $row) {
+            /** @var \Practice\Entity\Vehicle $row */
+            $simpleRows[] = [
+                'VehicleID' => $row->getVehicleID(),
+                'InhouseSellerID' => $row->getInhouseSellerID(),
+                'BuyerID' => $row->getBuyerID(),
+                'ModelID' => $row->getModelID(),
+                'SaleDate' => $row->getSaleDate()->format('Y-m-d'),
+                'BuyDate' => $row->getBuyDate()->format('Y-m-d'),
+            ];
+        }
+
+        return new JsonModel([
+            'data' => $simpleRows
+        ]);
     }
 }
